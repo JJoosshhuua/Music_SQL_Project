@@ -12,7 +12,7 @@ select * from invoice_line;
 select * from playlist;
 select * from playlist_track;
 
---1. Who is the senior most employee based on Job Title?
+--1. Who is the senior-most employee based on Job Title?
 
 select first_name, last_name, levels from employee
 order by levels desc
@@ -92,6 +92,7 @@ where milliseconds > (select avg(milliseconds) from track)
 order by milliseconds desc;
 
 -- 1. Find how much amount spent by each customer on artists? Write a query to return customer name, artist name and total spent
+
 select ar.name as artist_name, c.first_name, c.last_name, sum(il.unit_price*il.quantity) as Total_price from artist ar
 join album al on ar.artist_id = al.artist_id
 join track tr on al.album_id = tr.album_id
@@ -102,6 +103,7 @@ group by ar.name, c.customer_id
 order by Total_price desc;
 
 -- 2. We want to find out the most popular music genre for each country. We determine the most popular genre as the genre with the highest amount of purchases. Write a query that returns each country along with the top genre. For countries where the maximum number of purchases is shared return all genres
+
 with table1 as (
 				select c.country, gr.name, count(il.quantity) as total_sales,
 				ROW_NUMBER() over (partition by c.country order by count(il.quantity) desc) as Row_num 
@@ -116,6 +118,7 @@ select * from table1 where Row_num< '2';
 
 
 -- 3. Write a query that determines the customer that has spent the most on music for each country. Write a query that returns the country along with the top customer and how much they spent. For countries where the top amount spend is shared provide all customer who spent this amount.
+
 with table2 as (
 				select c.country, c.first_name, c.last_name, sum(il.unit_price*il.quantity) as Total_price,
 				ROW_NUMBER() over (partition by c.country order by sum(il.unit_price*il.quantity)) as Row_num 
