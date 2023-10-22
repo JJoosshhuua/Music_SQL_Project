@@ -1,6 +1,6 @@
 # Music_SQL_Project
 
-Used JOINS, CTE (Common Table Expressions), Subqueries to analyse the sales data.
+Used JOINS, CTE (Common Table Expressions), Subqueries to analyze the sales data.
 
 select * from artist;
 select * from customer;
